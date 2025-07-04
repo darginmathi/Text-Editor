@@ -17,7 +17,9 @@ public class Main
             String text = input.nextLine();
             if (text.equals(":w"))
             {
-                try (FileWriter writer = new FileWriter("output.txt"))
+                System.out.print("File name: ");
+                String fileName = input.nextLine().trim() + ".txt";
+                try (FileWriter writer = new FileWriter(fileName))
                 {
                     writer.write(buffer.toString());
                     System.out.println("Saving...");
