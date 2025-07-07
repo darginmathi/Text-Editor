@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class FileManager
 {
-    public  static void saveToFile(String fileName, StringBuffer buffer)
+    public static void saveToFile(String fileName, StringBuffer buffer)
     {
         try (FileWriter writer = new FileWriter(fileName))
         {

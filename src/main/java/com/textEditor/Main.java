@@ -1,41 +1,38 @@
 package com.textEditor;
 
+import com.textEditor.editor.Editor;
+import org.jline.reader.LineReader;
+import org.jline.reader.LineReaderBuilder;
+import org.jline.terminal.Terminal;
+import org.jline.terminal.TerminalBuilder;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 import static com.textEditor.io.FileManager.saveToFile;
 
 public class Main
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {
-        Scanner input = new Scanner(System.in);
-        System.out.println("T Editor:");
-        System.out.println("\":w\"to save  \":x\"to exit");
-        StringBuffer buffer = new StringBuffer();
-        while(true)
+        Editor editor = new Editor();
+        try
         {
-            String text = input.nextLine();
-            if (text.equals(":w"))
+            Terminal terminal = TerminalBuilder.builder().system(true).build();
+            LineReader reader = LineReaderBuilder.builder().terminal(terminal).build();
+            while (true)
             {
-                String temp;
-                if (args.length == 0)
+                String line = reader.readLine(">");
+
+                if ("exit".equalsIgnoreCase(line))
                 {
-                    temp  = "untitled";
+                    break;
                 }
-                else
-                {
-                    temp = args[0].trim();
-                }
-                String fileName = temp + ".txt";
-                saveToFile(fileName, buffer);
-                return;
             }
-            if (text.equals(":x"))
-            {
-                System.out.println("Exiting without saving...");
-                return;
-            }
-            buffer.append(text).append(System.lineSeparator());
+        }
+        catch (IOException e)
+        {
+            System.err.println("Error creating Terminal: "e.getMessage());
         }
     }
 }
