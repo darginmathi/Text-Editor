@@ -13,7 +13,7 @@ import static com.textEditor.io.FileManager.saveToFile;
 
 public class Main
 {
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args)
     {
         Editor editor = new Editor();
         try
@@ -32,7 +32,7 @@ public class Main
         }
         catch (IOException e)
         {
-            System.err.println("Error creating Terminal: "e.getMessage());
+            System.err.println("Error creating Terminal: " + e.getMessage());
         }
     }
 }
